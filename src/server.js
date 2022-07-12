@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
     getUsers(req, res);
   } else if (req.url === "/signup" && req.method === "POST") {
     createUser(req, res);
-  } else if (req.url.match(/\/signup\/\w+/) && req.method === "PATCH") {
+  } else if (req.url.match(/\/signup\/\w+/) && ( req.method === "PATCH" || req.method === "PUT")) {
     const id = req.url.split("/")[2];
     updateUser(req, res, id);
   } else if (req.url.match(/\/signup\/\w+/) && req.method === "DELETE") {
