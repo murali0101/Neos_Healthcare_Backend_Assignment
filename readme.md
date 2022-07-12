@@ -17,7 +17,7 @@ POST         /login
 # SignUp (body)
 {
     "name": "demo",
-    "email": "demo@gmail.com"
+    "email": "demo@gmail.com",
     "password": "0123456"
 }
 ```
@@ -25,7 +25,7 @@ POST         /login
 ```
 # Login (body)
 {
-    "email": "demo@gmail.com"
+    "email": "demo@gmail.com",
     "password": "0123456"
 }
 ```
