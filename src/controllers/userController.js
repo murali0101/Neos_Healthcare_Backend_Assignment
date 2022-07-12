@@ -1,6 +1,11 @@
 const User = require("../models/userModel");
 
-const { getPostData, hashPassword } = require("../utils/extraFunctions");
+const {
+  getPostData,
+  hashPassword,
+  signupValidator,
+  loginValidator,
+} = require("../utils/extraFunctions");
 
 async function getWelcomeGreet(req, res) {
   try {
@@ -30,8 +35,21 @@ async function getUsers(req, res) {
 async function createUser(req, res) {
   try {
     const body = await getPostData(req);
-
+    let result = signupValidator(body);
+    if (!result.status) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: result.error }));
+      return;
+    }
     const { name, email, password } = JSON.parse(body);
+
+    result = await User.findByEmail(email);
+
+    if (!!result) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: " Email ID Already Exists " }));
+      return;
+    }
 
     const user = {
       name,
@@ -69,13 +87,19 @@ async function updateUser(req, res, id) {
       const userData = {
         name: name || user.name,
         email: email || user.email,
-        password: password || user.password,
+        password: (password ? hashPassword(password) : false) || user.password,
       };
 
       const updateduser = await User.update(id, userData);
 
       res.writeHead(200, { "Content-Type": "application/json" });
-      return res.end(JSON.stringify(updateduser));
+      return res.end(
+        JSON.stringify({
+          id: updateduser.id,
+          name: updateduser.name,
+          email: updateduser.email,
+        })
+      );
     }
   } catch (error) {
     console.log(error);
@@ -102,6 +126,13 @@ async function deleteUser(req, res, id) {
 async function loginUser(req, res) {
   try {
     const body = await getPostData(req);
+    let result = loginValidator(body);
+    if (!result.status) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: result.error }));
+      return;
+    }
+
     const { email, password } = JSON.parse(body);
     const user = await User.findByEmail(email);
 

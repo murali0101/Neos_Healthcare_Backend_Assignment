@@ -41,8 +41,8 @@ function update(id, user) {
 
 function remove(id) {
   return new Promise((resolve, reject) => {
-   const user = users.filter((ele) => ele.id !== id);
-    writeDataToFile(path.join(__dirname, "../data/users.json"),user);
+    const user = users.filter((ele) => ele.id !== id);
+    writeDataToFile(path.join(__dirname, "../data/users.json"), user);
     resolve();
   });
 }

@@ -4,9 +4,10 @@ const {
   getUsers,
   createUser,
   updateUser,
-    deleteUser,
-    loginUser
+  deleteUser,
+  loginUser,
 } = require("./controllers/userController");
+
 const server = http.createServer((req, res) => {
   if (req.url === "/" && req.method === "GET") {
     getWelcomeGreet(req, res);
