@@ -1,6 +1,20 @@
 const User = require("../models/userModel");
 
-const { getPostData } = require("../utils/extraFunctions");
+const { getPostData, hashPassword } = require("../utils/extraFunctions");
+
+async function getWelcomeGreet(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(
+      JSON.stringify({
+        message: `welcome to neos-healthcare backend (server)`,
+        author: "M V Murali",
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 async function getUsers(req, res) {
   try {
@@ -22,7 +36,7 @@ async function createUser(req, res) {
     const user = {
       name,
       email,
-      password,
+      password: hashPassword(password),
     };
 
     const newUser = await User.create(user);
@@ -62,26 +76,49 @@ async function updateUser(req, res, id) {
   }
 }
 
-
 async function deleteUser(req, res, id) {
-    try {
-        const user = await User.findById(id)
+  try {
+    const user = await User.findById(id);
 
-        if(!user) {
-            res.writeHead(404, { 'Content-Type': 'application/json' })
-            res.end(JSON.stringify({ message: 'User Not Found' }))
-        } else {
-            await User.remove(id)
-            res.writeHead(200, { 'Content-Type': 'application/json' })
-            res.end(JSON.stringify({ message: `User ${id} removed` }))
-        }
-    } catch (error) {
-        console.log(error)
+    if (!user) {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: "User Not Found" }));
+    } else {
+      await User.remove(id);
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: `User ${id} removed` }));
     }
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+async function loginUser(req, res) {
+  try {
+    const body = await getPostData(req);
+    const { email, password } = JSON.parse(body);
+    const user = await User.findByEmail(email);
+
+    if (!user) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: "Check Your Email or Please SignUp" }));
+    } else if (user.password != hashPassword(password)) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: "Check Your Password" }));
+    } else {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({ name: user.name, email: user.email }));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
+  getWelcomeGreet,
   getUsers,
   createUser,
   updateUser,
   deleteUser,
+  loginUser,
 };

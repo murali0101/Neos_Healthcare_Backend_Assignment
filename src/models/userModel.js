@@ -23,6 +23,12 @@ function findById(id) {
     resolve(user);
   });
 }
+function findByEmail(email) {
+  return new Promise((resolve, reject) => {
+    const user = users.find((ele) => ele.email === email);
+    resolve(user);
+  });
+}
 
 function update(id, user) {
   return new Promise((resolve, reject) => {
@@ -45,6 +51,7 @@ module.exports = {
   findAll,
   create,
   findById,
+  findByEmail,
   update,
   remove,
 };

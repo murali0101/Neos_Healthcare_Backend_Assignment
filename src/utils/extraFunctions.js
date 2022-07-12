@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { createHmac } = require("node:crypto");
 
 function writeDataToFile(filename, content) {
   fs.writeFile(filename, JSON.stringify(content, null, 2), "utf8", (err) => {
@@ -26,7 +27,15 @@ function getPostData(req) {
   });
 }
 
+function hashPassword(password) {
+    const hash = createHmac("sha256", password)
+    .update("I love cupcakes")
+    .digest("hex");
+    return hash;
+}
+
 module.exports = {
   writeDataToFile,
   getPostData,
+  hashPassword,
 };
