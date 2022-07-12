@@ -4,14 +4,22 @@
 
 ```
 # Routes
+
 GET          /signup
 POST         /signup
-GET          /api/products/:id
 PATCH/PUT    /signup/:id
 DELETE       /signup/:id
 
 POST         /login
 
+```
+```
+# SignUp (body)
+{
+    "name": "demo",
+    "email": "demo@gmail.com"
+    "password": "0123456"
+}
 ```
 
 ## Usage
