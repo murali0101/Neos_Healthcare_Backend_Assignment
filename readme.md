@@ -22,6 +22,13 @@ POST         /login
 }
 ```
 
+```
+# Login (body)
+{
+    "email": "demo@gmail.com"
+    "password": "0123456"
+}
+```
 ## Usage
 
 ```
