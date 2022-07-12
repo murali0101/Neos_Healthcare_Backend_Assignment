@@ -42,7 +42,13 @@ async function createUser(req, res) {
     const newUser = await User.create(user);
 
     res.writeHead(201, { "Content-Type": "application/json" });
-    return res.end(JSON.stringify(newUser));
+    return res.end(
+      JSON.stringify({
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+      })
+    );
   } catch (error) {
     console.log(error);
   }
@@ -107,7 +113,9 @@ async function loginUser(req, res) {
       res.end(JSON.stringify({ message: "Check Your Password" }));
     } else {
       res.writeHead(200, { "Content-Type": "application/json" });
-      return res.end(JSON.stringify({ name: user.name, email: user.email }));
+      return res.end(
+        JSON.stringify({ id: user.id, name: user.name, email: user.email })
+      );
     }
   } catch (error) {
     console.log(error);
