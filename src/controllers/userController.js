@@ -14,6 +14,24 @@ async function getWelcomeGreet(req, res) {
       JSON.stringify({
         message: `welcome to neos-healthcare backend (server)`,
         author: "M V Murali",
+        routes_signup: {
+          GET: "/signup",
+          POST: "/signup",
+          PATCH_or_PUT: " /signup/:id",
+          DELETE: "signup/:id",
+        },
+        routes_login: {
+          POST: "/login",
+        },
+        singup_body: {
+          name: "demo",
+          email: "demo@gmail.com",
+          password: "0123456",
+        },
+        login_body: {
+          email: "demo@gmail.com",
+          password: "0123456",
+        },
       })
     );
   } catch (error) {

@@ -1,6 +1,6 @@
 # NodeJS REST API
 
-> Full CRUD REST API using Node.js with no framework and libraries
+> Full CRUD REST API using Node.js without any framework and libraries
 
 ```
 # Routes
