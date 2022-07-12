@@ -1,0 +1,28 @@
+{
+  "name": "neos_healthcare_backend_assignment",
+  "version": "1.0.0",
+  "description": "neos_healthcare_backend_assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murali0101/Neos_Healthcare_Backend_Assignment.git"
+  },
+  "keywords": [
+    "backend",
+    "http",
+    "https",
+    "server",
+    "login",
+    "sigup"
+  ],
+  "author": "M V Murali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/murali0101/Neos_Healthcare_Backend_Assignment/issues"
+  },
+  "homepage": "https://github.com/murali0101/Neos_Healthcare_Backend_Assignment#readme"
+}
