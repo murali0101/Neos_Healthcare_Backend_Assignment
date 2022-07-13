@@ -53,15 +53,6 @@ function remove(id) {
   });
 }
 
-// function remove(id) {
-//   return new Promise((resolve, reject) => {
-//     const user = users.filter((ele) => ele.id !== id);
-//     console.log('user:', user)
-//     writeDataToFile(path.join(__dirname, "../data/users.json"), user);
-//     resolve();
-//   });
-// }
-
 module.exports = {
   findAll,
   create,
