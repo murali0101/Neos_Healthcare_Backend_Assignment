@@ -39,6 +39,8 @@ async function getWelcomeGreet(req, res) {
     );
   } catch (error) {
     console.log(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: error.message }));
   }
 }
 
@@ -52,6 +54,8 @@ async function getUsers(req, res) {
     res.end(JSON.stringify(user));
   } catch (error) {
     console.log(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: error.message }));
   }
 }
 
@@ -94,6 +98,8 @@ async function createUser(req, res) {
     );
   } catch (error) {
     console.log(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: error.message }));
   }
 }
 
@@ -135,6 +141,8 @@ async function updateUser(req, res, id) {
     }
   } catch (error) {
     console.log(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: error.message }));
   }
 }
 
@@ -154,6 +162,8 @@ async function deleteUser(req, res, id) {
     }
   } catch (error) {
     console.log(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: error.message }));
   }
 }
 
@@ -186,6 +196,8 @@ async function loginUser(req, res) {
     }
   } catch (error) {
     console.log(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: error.message }));
   }
 }
 
