@@ -85,8 +85,8 @@ const patchValidator = (obj) => {
 
 const signupValidator = (obj) => {
   const { name, email, password } = JSON.parse(obj);
-  let isEmail = email.split("").lastIndexOf("@");
-  let isEmailDot = email.split("").lastIndexOf(".");
+  let isEmail = email?.split("").lastIndexOf("@");
+  let isEmailDot = email?.split("").lastIndexOf(".");
 
   if (name.length <= 3) {
     return {
@@ -132,8 +132,8 @@ const signupValidator = (obj) => {
 
 const loginValidator = (obj) => {
   const { name, email, password } = JSON.parse(obj);
-  let isEmail = email.split("").lastIndexOf("@");
-  let isEmailDot = email.split("").lastIndexOf(".");
+  let isEmail = email?.split("").lastIndexOf("@");
+  let isEmailDot = email?.split("").lastIndexOf(".");
 
   if (email.length < 3) {
     return {
