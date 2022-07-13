@@ -41,12 +41,26 @@ function update(id, user) {
 
 function remove(id) {
   return new Promise((resolve, reject) => {
-    const user = users.filter((ele) => ele.id !== id);
-    console.log('user:', user)
-    writeDataToFile(path.join(__dirname, "../data/users.json"), user);
+    let index = null;
+    users.forEach((ele, ind) => {
+      if (ele.id === id) {
+        index = ind;
+      }
+    });
+    users.splice(index, 1);
+    writeDataToFile(path.join(__dirname, "../data/users.json"), users);
     resolve();
   });
 }
+
+// function remove(id) {
+//   return new Promise((resolve, reject) => {
+//     const user = users.filter((ele) => ele.id !== id);
+//     console.log('user:', user)
+//     writeDataToFile(path.join(__dirname, "../data/users.json"), user);
+//     resolve();
+//   });
+// }
 
 module.exports = {
   findAll,
