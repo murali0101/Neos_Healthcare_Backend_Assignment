@@ -1,4 +1,5 @@
 const http = require("http");
+
 const {
   getWelcomeGreet,
   getUsers,
@@ -7,6 +8,8 @@ const {
   deleteUser,
   loginUser,
 } = require("./controllers/userController");
+
+// created Server  and all routes----------------------------------------------------------
 
 const server = http.createServer((req, res) => {
   if (req.url === "/" && req.method === "GET") {
@@ -28,6 +31,8 @@ const server = http.createServer((req, res) => {
     res.end(JSON.stringify({ message: "Route Not Found" }));
   }
 });
+
+// Server listening on port----------------------------------------------------------
 
 const PORT = process.env.PORT || 8000;
 

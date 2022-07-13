@@ -8,6 +8,8 @@ const {
   patchValidator,
 } = require("../utils/extraFunctions");
 
+// welcome greet function ----------------------------------------------------------
+
 async function getWelcomeGreet(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "application/json" });
@@ -40,6 +42,8 @@ async function getWelcomeGreet(req, res) {
   }
 }
 
+// get all user details function ----------------------------------------------------------
+
 async function getUsers(req, res) {
   try {
     const user = await User.findAll();
@@ -50,6 +54,8 @@ async function getUsers(req, res) {
     console.log(error);
   }
 }
+
+// create a user or user signup  function ----------------------------------------------------------
 
 async function createUser(req, res) {
   try {
@@ -91,11 +97,11 @@ async function createUser(req, res) {
   }
 }
 
+// user details modifying function ----------------------------------------------------------
+
 async function updateUser(req, res, id) {
   try {
     const user = await User.findById(id);
-
-   
 
     if (!user) {
       res.writeHead(404, { "Content-Type": "application/json" });
@@ -132,6 +138,8 @@ async function updateUser(req, res, id) {
   }
 }
 
+// user details delete function ----------------------------------------------------------
+
 async function deleteUser(req, res, id) {
   try {
     const user = await User.findById(id);
@@ -148,6 +156,8 @@ async function deleteUser(req, res, id) {
     console.log(error);
   }
 }
+
+// user login function ----------------------------------------------------------
 
 async function loginUser(req, res) {
   try {

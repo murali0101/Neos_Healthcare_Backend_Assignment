@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { createHmac } = require("node:crypto");
-
+// writeFile function  ----------------------------------------------------------
 function writeDataToFile(filename, content) {
   fs.writeFile(filename, JSON.stringify(content, null, 2), "utf8", (err) => {
     if (err) {
@@ -8,7 +8,7 @@ function writeDataToFile(filename, content) {
     }
   });
 }
-
+// get post data  function  ----------------------------------------------------------
 function getPostData(req) {
   return new Promise((resolve, reject) => {
     try {
@@ -26,14 +26,14 @@ function getPostData(req) {
     }
   });
 }
-
+// Password hash function  ----------------------------------------------------------
 function hashPassword(password) {
   const hash = createHmac("sha256", password)
     .update("I love cupcakes")
     .digest("hex");
   return hash;
 }
-
+// patch validator function  ----------------------------------------------------------
 const patchValidator = (obj) => {
   const { name, email, password } = JSON.parse(obj);
 
@@ -82,7 +82,7 @@ const patchValidator = (obj) => {
     };
   }
 };
-
+//signup validator function  ----------------------------------------------------------
 const signupValidator = (obj) => {
   const { name, email, password } = JSON.parse(obj);
   let isEmail = email?.split("").lastIndexOf("@");
@@ -129,7 +129,7 @@ const signupValidator = (obj) => {
     };
   }
 };
-
+// login validator function  ----------------------------------------------------------
 const loginValidator = (obj) => {
   const { name, email, password } = JSON.parse(obj);
   let isEmail = email?.split("").lastIndexOf("@");
