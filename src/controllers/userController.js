@@ -5,6 +5,7 @@ const {
   hashPassword,
   signupValidator,
   loginValidator,
+  patchValidator,
 } = require("../utils/extraFunctions");
 
 async function getWelcomeGreet(req, res) {
@@ -94,12 +95,19 @@ async function updateUser(req, res, id) {
   try {
     const user = await User.findById(id);
 
+   
+
     if (!user) {
       res.writeHead(404, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ message: "User Not Found" }));
     } else {
       const body = await getPostData(req);
-
+      const result = patchValidator(body);
+      if (!result.status) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: result.error }));
+        return;
+      }
       const { name, email, password } = JSON.parse(body);
 
       const userData = {

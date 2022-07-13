@@ -34,6 +34,55 @@ function hashPassword(password) {
   return hash;
 }
 
+const patchValidator = (obj) => {
+  const { name, email, password } = JSON.parse(obj);
+
+  let isEmail = email.split("").lastIndexOf("@");
+
+  let isEmailDot = email.split("").lastIndexOf(".");
+
+  if (!!name && name.length <= 3) {
+    return {
+      status: false,
+      error: "Name length should be greater then 3 alphabets ",
+    };
+  } else if (!!email && email.length < 3) {
+    return {
+      status: false,
+      error: "Please add a valid email id",
+    };
+  } else if (isEmail === -1) {
+    return {
+      status: false,
+      error: "Invalid email id, '@' is missing",
+    };
+  } else if (isEmailDot === -1) {
+    return {
+      status: false,
+      error: "Invalid email id, '.' is missing",
+    };
+  } else if (!!email && isEmail === email.length - 1) {
+    return {
+      status: false,
+      error: "'@' shouldn't be at the end",
+    };
+  } else if (!!email && isEmailDot === email.length - 1) {
+    return {
+      status: false,
+      error: "'.' shouldn't be at the end",
+    };
+  } else if (!!password && password.length < 6) {
+    return {
+      status: false,
+      error: "Password length should be greater then 5 characters",
+    };
+  } else {
+    return {
+      status: true,
+    };
+  }
+};
+
 const signupValidator = (obj) => {
   const { name, email, password } = JSON.parse(obj);
   let isEmail = email.split("").lastIndexOf("@");
@@ -129,4 +178,5 @@ module.exports = {
   hashPassword,
   signupValidator,
   loginValidator,
+  patchValidator,
 };
