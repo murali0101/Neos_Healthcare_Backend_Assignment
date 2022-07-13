@@ -37,9 +37,9 @@ function hashPassword(password) {
 const patchValidator = (obj) => {
   const { name, email, password } = JSON.parse(obj);
 
-  let isEmail = email.split("").lastIndexOf("@");
+  let isEmail = email?.split("").lastIndexOf("@");
 
-  let isEmailDot = email.split("").lastIndexOf(".");
+  let isEmailDot = email?.split("").lastIndexOf(".");
 
   if (!!name && name.length <= 3) {
     return {
